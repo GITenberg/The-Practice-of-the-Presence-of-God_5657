@@ -1,0 +1,32 @@
+_repo: The-Practice-of-the-Presence-of-God_5657
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Lawrence, of the Resurrection, Brother
+    aliases:
+    - Lawrence, Brother
+    - Herman, Nicholas
+    - Herman, Nicolas
+    - Laurent, de la Résurrection, frère
+    - Laurent, de la Resurrection, frere
+    birthdate: 1611
+    deathdate: 1691
+    gutenberg_agent_id: '1832'
+    url: http://www.gutenberg.org/2009/agents/1832
+    wikipedia: http://en.wikipedia.org/wiki/Brother_Lawrence
+description: Translation of La pratique de la présence de Dieu.
+gutenberg_issued: '2004-05-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '5657'
+language: en
+publisher: Project Gutenberg
+rights: Copyrighted. Read the copyright notice inside this book for details.
+rights_url: ''
+subjects:
+- !lcsh 'Spiritual life -- Catholic Church'
+- !lcsh 'Christian life -- Catholic authors'
+- !lcc 'BX'
+- GITenberg
+title: The Practice of the Presence of God
+url: http://www.gutenberg.org/ebooks/5657
