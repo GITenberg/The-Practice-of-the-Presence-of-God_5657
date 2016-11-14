@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: UkE371oBpD6SWb1Jhp68UWR5QIoERsJJBylYk7Sfg1VNahO9k85qx5xMpBeX8qUUSrBwziAbI25nyWlmxsaKmZF3FgCcL+nBP0GwhKfo3pxqdtf8ZynJIP1PLa6koLhibOj6Z7bz0+rQtGl+goUzlJolU8zUXO0v8CdMmNaMoYk2yjb6ycqGDteGQrOemVDk7smK4ZuxPeQTp5LvNlkZeix7PQ4lX3fsc2O5FBfi0vd7+NZUIcQD8PJG0tHzTrFRFC9Q5mKdyky0wDA52yXcYyI0HSolsMOTBWEGGuq/d3Vw+FTP229vGlcHcFW9+E0ee4hTqn05OjsV/czuDYGgy0wYSMV0G1Kk7HahsycbW2fksUtkdKp1x2P9lW0ZrGr+n0HSwbmOROyn84FP17N3ikVBWWh4NiYm5+7KZYjyoE0Ufq2aNDXyBtN2kqBRH2xTPmuwUl3xItShWFjQx7qwxfWTomTmfEU56xmINYFB72tXed5+NlIOFiSIi+51mSTIXzd+hEY6LQxHynZViqZ2hLee7FbWorBrgEgFgRrbl1yOCj3n6um59M/1/0ET6FF8a71M794+nBkLavkLeUXx2SaSmILKm2iwcRe9gcb48L0Z6rPYYVjUa0B+fH+1jaVN4i5zqV49DQh7eMP8rwjrIEeUTzXqJun8ZeBUZewnXyM=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/The-Practice-of-the-Presence-of-God_5657
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
